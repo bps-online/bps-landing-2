@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>BPS Technology</title>
+<style>
+:root{
+  --navy:#16243E; --navy-deep:#0E1830; --amber:#D9A441; --amber-deep:#C08E30;
+  --paper:#FFFFFF; --ink:#1A1D24; --mute:#6B7280; --line:#E7E5DF;
+  --sans:"IBM Plex Sans","Segoe UI",sans-serif;
+  --cta-h:56px; /* ขนาดปุ่มกดด้วยนิ้วโป้ง */
+  --img-w:1080; --img-h:1350; /* อัตราส่วน 4:5 */
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;font-family:var(--sans);color:var(--ink)}
+body{
+  background:
+    radial-gradient(circle at 15% 0%, rgba(217,164,65,.14), transparent 45%),
+    radial-gradient(circle at 100% 100%, rgba(217,164,65,.10), transparent 50%),
+    linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+  min-height:100vh;
+}
+#page{max-width:480px;margin:0 auto;padding-bottom:calc(var(--cta-h) + 20px);background:var(--paper);
+  box-shadow:0 20px 60px rgba(0,0,0,.35);min-height:100vh}
+@media(min-width:560px){
+  #page{margin:24px auto;border-radius:16px;overflow:hidden;min-height:0;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+  #heroWrap{border-radius:16px 16px 0 0;overflow:hidden}
+}
+@media(max-width:359px){
+  :root{--cta-h:50px}
+  #modal h2{font-size:16.5px}
+  #steps li{font-size:13.5px}
+}
+
+#heroWrap{cursor:pointer;position:relative;width:100%;line-height:0;display:block;text-decoration:none}
+#heroImg{width:100%;height:auto;display:block;aspect-ratio:var(--img-w)/var(--img-h);object-fit:cover}
+
+#stickyCta{position:fixed;left:0;right:0;bottom:0;padding:8px 14px calc(8px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(255,255,255,0),#fff 30%);z-index:40;display:flex;justify-content:center}
+#ctaBtn{width:100%;max-width:452px;display:flex;align-items:center;justify-content:center;gap:8px;
+  height:var(--cta-h);border:none;border-radius:999px;background:var(--amber);color:var(--navy-deep);
+  font-family:var(--sans);font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(217,164,65,.4)}
+#ctaBtn:active{background:var(--amber-deep)}
+.cta-icon{font-size:17px}
+
+#overlay{position:fixed;inset:0;background:rgba(14,24,48,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+#overlay.show{display:flex}
+@media(min-width:640px){#overlay{align-items:center}}
+#modal{width:100%;max-width:440px;background:#fff;border-radius:18px 18px 0 0;padding:22px 22px calc(20px + env(safe-area-inset-bottom));
+  position:relative;transform:translateY(24px);opacity:0;transition:transform .25s ease,opacity .25s ease;
+  box-shadow:0 -8px 32px rgba(0,0,0,.18)}
+@media(min-width:640px){#modal{border-radius:18px}}
+#overlay.show #modal{transform:translateY(0);opacity:1}
+#closeBtn{position:absolute;top:12px;right:14px;width:28px;height:28px;border:none;border-radius:50%;
+  background:#F1F0EC;color:var(--mute);font-size:14px;cursor:pointer;line-height:1}
+.modal-icon{width:44px;height:44px;border-radius:50%;background:var(--navy);color:var(--amber);
+  display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:12px}
+#modal h2{font-size:17px;margin:0 0 13px;color:var(--navy-deep);line-height:1.4}
+#steps{margin:0 0 12px;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+#steps li{font-size:14px;line-height:1.5;color:var(--ink)}
+.modal-note{font-size:12px;color:var(--mute);margin:0 0 16px;padding:8px 11px;background:#F6F5F1;border-radius:8px}
+#lineBtn{display:flex;align-items:center;justify-content:center;gap:8px;height:var(--cta-h);
+  border-radius:999px;background:var(--amber);color:var(--navy-deep);text-decoration:none;
+  font-size:15px;font-weight:700;box-shadow:0 6px 18px rgba(217,164,65,.4)}
+#lineBtn:active{background:var(--amber-deep)}
+</style>
+</head>
+<body>
+
+<div id="page">
+  <a id="heroWrap" href="#" target="_blank" rel="noopener">
+    <img id="heroImg" src="heroimg.png" alt="BPS Technology">
+  </a>
+</div>
+
+<div id="stickyCta">
+  <button id="ctaBtn" onclick="openModal()">
+    <span class="cta-icon">💬</span> เพิ่มเพื่อน LINE ปรึกษาฟรี
+  </button>
+</div>
+
+<div id="overlay" onclick="closeModal(event)">
+  <div id="modal">
+    <button id="closeBtn" onclick="closeModal(event)" aria-label="ปิด">✕</button>
+    <div class="modal-icon">💬</div>
+    <h2>ก่อนแอดไลน์ อ่านตรงนี้ก่อนนะครับ</h2>
+    <ol id="steps">
+      <li>แอดไลน์โพยช่างที่ปุ่มด้านล่าง</li>
+      <li>ขอใบเสนอราคาฟรีไม่มีค่าใช้จ่าย</li>
+      <li>ดำเนินการทั้งหมดโดย บริษัท บีพีเอส เทคโนโลยี จำกัด (มหาชน)</li>
+    </ol>
+    <p class="modal-note">ไม่มีค่าใช้จ่ายในการปรึกษาและสำรวจหน้างาน</p>
+    <a id="lineBtn" href="#" target="_blank" rel="noopener">
+      <span class="cta-icon">💬</span> เพิ่มเพื่อน LINE ปรึกษาฟรี
+    </a>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// ตั้งค่าหลัก — แก้ตรงนี้ที่เดียว
+// ============================================================
+const LINE_URL = 'https://lin.ee/aT0ONNM'; // ← ลิงก์ LINE OA จริง
+
+// ส่ง UTM parameters จาก URL แอดต่อไปให้ลิงก์ LINE อัตโนมัติ
+const utmParams = window.location.search; // เช่น "?utm_source=fb&utm_campaign=xxx"
+const lineUrlWithUtm = LINE_URL + utmParams;
+document.getElementById('heroWrap').href = lineUrlWithUtm;
+document.getElementById('lineBtn').href = lineUrlWithUtm;
+
+function openModal(){
+  document.getElementById('overlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(ev){
+  if (ev.target.id !== 'overlay' && ev.target.id !== 'closeBtn') return;
+  document.getElementById('overlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+</script>
+
+</body>
+</html>
